@@ -116,6 +116,9 @@ def main():
         elif command == "all":
             print(show_all(contacts))
 
+        elif command == "help":
+            print(commands)
+
         else:
             print("Invalid command.")
 
