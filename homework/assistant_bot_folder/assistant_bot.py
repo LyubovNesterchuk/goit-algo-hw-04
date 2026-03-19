@@ -73,6 +73,12 @@ def show_all(contacts):
     
     return "\n".join(result)
 
+def say_hello():
+    return "How can I help you?"
+
+def show_help():
+    return commands
+
 
 def main():
     contacts = {}
@@ -93,7 +99,7 @@ def main():
             break
 
         elif command == "hello":
-            print("How can I help you?")
+            print(say_hello())
 
         elif command == "add":
             if len(args) != 2:
@@ -117,7 +123,7 @@ def main():
             print(show_all(contacts))
 
         elif command == "help":
-            print(commands)
+            print(show_help())
 
         else:
             print("Invalid command.")

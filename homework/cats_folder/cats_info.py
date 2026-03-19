@@ -1,9 +1,12 @@
 # №2
 import pathlib 
 
-current_dir = pathlib.Path(__file__).parent 
+
 
 def get_cats_info(path: str) -> list[dict]:
+    
+    current_dir = pathlib.Path(__file__).parent 
+    
     try:
         with open(current_dir / path, "r", encoding="utf-8") as file:
             
@@ -28,3 +31,4 @@ def get_cats_info(path: str) -> list[dict]:
     
 cats_info = get_cats_info("cats_file.txt")
 print(cats_info)
+

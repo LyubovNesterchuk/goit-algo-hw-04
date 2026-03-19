@@ -1,34 +1,39 @@
 from pathlib import Path
-from colorama import Fore
+from colorama import Fore, init
 import sys
 
+init(autoreset=True)
 
-def parse_folder(path: Path):
-    
-    
-    
+
+def parse_folder(path: Path, level=0):
+    indent = "    " * level  # 4 пробіли на рівень
+
     for element in path.iterdir():
         if element.is_dir():
-            print(Fore.RED + f"{element.name}")
-            parse_folder(element)
+            print(Fore.RED + f"{indent}📂 {element.name}")
+            parse_folder(element, level + 1)
         elif element.is_file():
-            print(Fore.GREEN + f"{element.name}")
+            print(Fore.GREEN + f"{indent}📄 {element.name}")
 
-    # for element in path.iterdir():
-    #     if element.is_dir():
-    #         print(Fore.RED + f"This is folder: {element.name}")
-    #         parse_folder(element)
-    #     elif element.is_file():
-    #         print(Fore.GREEN + f"This is file: {element.name}")
 
-if len(sys.argv) < 2:
-    print("Будь ласка, вкажіть шлях до папки")
-    sys.exit(1)
+def main():
+    if len(sys.argv) < 2:
+        print("Будь ласка, вкажіть шлях до папки")
+        return
 
-path = Path(sys.argv[1])
+    path = Path(sys.argv[1])
 
-if not path.exists() or not path.is_dir():
-    print("Вказаний шлях не існує або це не папка")
-    sys.exit(1)
+    if not path.is_dir():
+        print("Це не папка")
+        return
 
-parse_folder(path) # в терміналі python main.py homework
+    print(Fore.YELLOW + f"📁 {path.name}")
+    parse_folder(path)
+
+
+if __name__ == "__main__":
+    main()
+
+
+# cd ~/Desktop/Projects/goit-algo-hw-04
+# python main.py homework
